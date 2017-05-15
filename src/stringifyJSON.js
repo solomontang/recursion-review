@@ -8,11 +8,10 @@ var stringifyJSON = function(obj) {
   // literal conversion to string
   var result = '';
   if (Array.isArray(obj)) {
-    console.log('array');
     result += stringifyArray(obj);
-  } else if (typeof obj === 'object' && obj != null) {
+  } else if (typeof obj === 'object' && obj !== null) {
     //stringify object
-    stringifyObject(obj);
+    result += stringifyObject(obj);
   } else if (typeof obj === 'string') {
     //stringify string
     result = '"' + String(obj) + '"';
@@ -39,5 +38,21 @@ var stringifyArray = function(array) {
 };
 
 var stringifyObject = function(object) {
+  var result = '{';
+  Object.keys(object).forEach(function(key) {
+    console.log(typeof object[key], object[key]);
+    if (typeof object[key] !== 'function' && object[key] !== undefined) {
+      result += stringifyJSON(key) + ':' + stringifyJSON(object[key]);
+      result += ',';
+    }
+  });
+  //remove last comma at the end
+  if (result.length > 1) {
+    result = result.slice(0, -1);
+  }
+  
+  result += '}';
+  console.log(result);
+  return result;
 };
 
