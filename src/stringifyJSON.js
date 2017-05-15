@@ -8,13 +8,36 @@ var stringifyJSON = function(obj) {
   // literal conversion to string
   var result = '';
   if (Array.isArray(obj)) {
-    //stringify Array
-  } else if (typeof obj === 'object' && typeof obj != null) {
+    console.log('array');
+    result += stringifyArray(obj);
+  } else if (typeof obj === 'object' && obj != null) {
     //stringify object
+    stringifyObject(obj);
+  } else if (typeof obj === 'string') {
+    //stringify string
+    result = '"' + String(obj) + '"';
   } else {
     //stringify literal
-    console.log(obj);
-    result = '' + obj;
+    result = String(obj);
   }
   return result;
 };
+
+var stringifyArray = function(array) {
+  //'[' call stringifyJSON ']';
+  var result = '[';
+  array.forEach(function(element) {
+    result += stringifyJSON(element);
+    result += ',';
+  });
+  if (result.length > 1) {
+    result = result.slice(0, -1);
+  }
+  result += ']';
+  
+  return result;
+};
+
+var stringifyObject = function(object) {
+};
+
