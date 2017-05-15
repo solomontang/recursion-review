@@ -5,4 +5,16 @@
 
 var stringifyJSON = function(obj) {
   // your code goes here
+  // literal conversion to string
+  var result = '';
+  if (Array.isArray(obj)) {
+    //stringify Array
+  } else if (typeof obj === 'object' && typeof obj != null) {
+    //stringify object
+  } else {
+    //stringify literal
+    console.log(obj);
+    result = '' + obj;
+  }
+  return result;
 };
