@@ -19,9 +19,8 @@ var getElementsByClassName = function(className
       results.push(element);
     }
     if (element.childNodes) {
-      element.childNodes.forEach(function(childElement){
+      element.childNodes.forEach(function(childElement) {
         //check if childNodes contains className
-        console.log(childElement);
         if (childElement.classList) {
           // use recursion
           getNodes(childElement);
