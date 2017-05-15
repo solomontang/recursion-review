@@ -40,7 +40,6 @@ var stringifyArray = function(array) {
 var stringifyObject = function(object) {
   var result = '{';
   Object.keys(object).forEach(function(key) {
-    console.log(typeof object[key], object[key]);
     if (typeof object[key] !== 'function' && object[key] !== undefined) {
       result += stringifyJSON(key) + ':' + stringifyJSON(object[key]);
       result += ',';
@@ -52,7 +51,6 @@ var stringifyObject = function(object) {
   }
   
   result += '}';
-  console.log(result);
   return result;
 };
 
