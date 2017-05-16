@@ -2,7 +2,7 @@
 // var stringifyJSON = JSON.stringify;
 
 // but you don't so you're going to write it from scratch:
-
+//testing pomander
 var stringifyJSON = function(obj) {
   // your code goes here
   // literal conversion to string
@@ -23,34 +23,19 @@ var stringifyJSON = function(obj) {
 };
 
 var stringifyArray = function(array) {
-  //'[' call stringifyJSON ']';
-  var result = '[';
-  array.forEach(function(element) {
-    result += stringifyJSON(element);
-    result += ',';
+  var result = array.map(function(element) {
+    return stringifyJSON(element);
   });
-  if (result.length > 1) {
-    result = result.slice(0, -1);
-  }
-  result += ']';
-  
-  return result;
+  return '[' + result + ']';
 };
 
 var stringifyObject = function(object) {
-  var result = '{';
+  var result = [];
   Object.keys(object).forEach(function(key) {
     if (typeof object[key] !== 'function' && object[key] !== undefined) {
-      result += stringifyJSON(key) + ':' + stringifyJSON(object[key]);
-      result += ',';
+      result.push(stringifyJSON(key) + ':' + stringifyJSON(object[key]));
     }
   });
-  //remove last comma at the end
-  if (result.length > 1) {
-    result = result.slice(0, -1);
-  }
-  
-  result += '}';
-  return result;
+  return '{' + result + '}';
 };
 
